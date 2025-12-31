@@ -33,7 +33,7 @@ jobs:
     needs: Testing
     steps:
       - name: Checkout code
-        run: actions/checkout@v4
+        run: actions/checkout@v2
  
       - name: Install Node.js
         run: |
