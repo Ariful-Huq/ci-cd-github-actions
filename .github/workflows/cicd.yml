@@ -33,7 +33,7 @@ jobs:
     needs: Testing
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
  
       - name: Install Node.js
         run: |
@@ -53,5 +53,5 @@ jobs:
  
       - name: Deploy to Server
         run: |
-          pm2 delete "Server" || true
-          pm2 start "npm run dev" --name="Server"
+          sudo pm2 delete "Server" || true
+          sudo pm2 start "npm run dev" --name="Server"
