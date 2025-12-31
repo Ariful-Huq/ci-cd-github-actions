@@ -29,11 +29,11 @@ jobs:
 
   
   Deploy:
-    runs-on: self-hosted
+    runs-on: [self-hosted, github-runner-1]
     needs: Testing
     steps:
       - name: Checkout code
-        run: actions/checkout@v2
+        uses: actions/checkout@v2
  
       - name: Install Node.js
         run: |
