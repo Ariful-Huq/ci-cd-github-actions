@@ -29,7 +29,7 @@ jobs:
 
   
   Deploy:
-    runs-on: [self-hosted, github-runner-2]
+    runs-on: [self-hosted, github-action-runner-2]
     needs: Testing
     steps:
       - name: Checkout code
@@ -56,6 +56,12 @@ jobs:
           pwd
           pm2 delete "Server" || true
           pm2 start "npm run dev" --name="Server"
+
+      - name: Install NGINX
+        run: |
+          sudo apt update
+          sudo apt install nginx -y
+          sudo systemctl status nginx --no-pager
 
       - name: Configure NGINX Proxy Pass
         run: |
