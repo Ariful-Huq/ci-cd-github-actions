@@ -29,7 +29,7 @@ jobs:
 
   
   Deploy:
-    runs-on: [self-hosted, github-action-runner-2]
+    runs-on: [self-hosted, github-action-runner-3]
     needs: Testing
     steps:
       - name: Checkout code
@@ -49,13 +49,16 @@ jobs:
         run: npm install
 
       - name: Install pm2 
-        run: sudo npm install -g pm2
+        run: |
+          sudo npm install -g pm2
+          pwd
  
       - name: Deploy to Server
         run: |
           pwd
           pm2 delete "Server" || true
-          pm2 start "npm run dev" --name="Server"
+          pm2 start npm --name "Server" --cwd "$GITHUB_WORKSPACE" -- run dev
+          pm2 save
 
       - name: Install NGINX
         run: |
